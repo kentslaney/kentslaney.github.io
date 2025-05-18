@@ -78,6 +78,7 @@ body {
   color: inherit;
   padding: 1rem;
   text-wrap: nowrap;
+  background: #ffffff80
 }
 
 #ks-below > a:hover {
@@ -109,17 +110,19 @@ body {
 
 .section-icon {
   display: inline-block;
-  height: 2rem;
+  height: 3rem;
+  float: left;
+  margin: 0 1rem 0 0;
 }
 
 #ks-select {
   position: absolute;
-  font-family: Arial;
+  font-family: "Roboto", Arial;
   font-size: calc(min(
     var(--ks-case-width) / var(--ks-contain-ratio),
     var(--ks-case-height) * var(--ks-cover-ratio) / var(--ks-contain-ratio)));
   font-weight: 600;
-  transform: scale(99%, 99%) translate(1%, -16%);
+  transform: scale(107%, 95%) translate(5%, -17%);
   opacity: 0.5
 }
 
@@ -153,6 +156,11 @@ body {
     text-align: right;
   }
 
+  .section-icon {
+    float: right;
+    margin: 0 0 0 1rem;
+  }
+
   #scroll-hint {
     border-color: #000;
   }
@@ -170,5 +178,9 @@ body {
 
   #ks-center, #ks-left, .section-icon {
     filter: invert(1);
+  }
+
+  #ks-below > a {
+    background: #00000080
   }
 }
