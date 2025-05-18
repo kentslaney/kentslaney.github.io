@@ -43,4 +43,10 @@ window.addEventListener("load", () => {
       },
     ]
   });
+  selectable = document.querySelector("#ks-select")
+  window.addEventListener("scroll", () => {
+    const pos = window.scrollY / window.innerHeight
+    if (pos > 0.1) selectable.classList.add("hidden")
+    else selectable.classList.remove("hidden")
+  }, { passive: true })
 })
