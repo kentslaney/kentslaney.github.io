@@ -114,7 +114,7 @@ body {
 
 #ks-select {
   position: absolute;
-  font-family: Helvetica;
+  font-family: Arial;
   font-size: calc(min(
     var(--ks-case-width) / var(--ks-contain-ratio),
     var(--ks-case-height) * var(--ks-cover-ratio) / var(--ks-contain-ratio)));
@@ -125,10 +125,6 @@ body {
 
 .hidden {
   visibility: hidden;
-}
-
-@supports (-moz-appearance:none) {
-    #ks-select { transform: scale(100%, 92%) translate(1.5%, -9.5%); }
 }
 
 @media (max-aspect-ratio: 1 / 1) {
