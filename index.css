@@ -1,0 +1,148 @@
+body {
+  margin: 0;
+}
+
+#ks-case {
+  display: inline-block;
+  width: 60lvw;
+  position: fixed;
+  height: 50lvh;
+  top: 0;
+}
+
+#headshot, #headshot-dark {
+  position: fixed;
+  top: calc(100lvh - 35lvw);
+  width: 35lvw;
+  left: 65lvw;
+  z-index: -1;
+}
+
+#headshot-dark {
+  display: none;
+}
+
+#scroll-index {
+  position: absolute;
+  top: 100lvh;
+}
+
+#ks-center {
+  display: none;
+}
+
+#ks-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#ks-cover {
+  aspect-ratio: 7775 / 3888;
+  max-height: 100%;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#ks-contain {
+  aspect-ratio: 6 / 1;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#ks-below {
+  position: absolute;
+  top: 100%;
+  padding: 2%;
+  font-family: Helvetica;
+  font-size: 3rem;
+}
+
+#ks-below > a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 1rem;
+}
+
+#ks-below > a:hover {
+  text-decoration: underline;
+}
+
+#content {
+  margin-top: 100lvh;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  background: white;
+  border-top: 1px solid #aaa;
+}
+
+#scroll-hint {
+  position: fixed;
+  bottom: 5vmin;
+  width: 3vmin;
+  height: calc(3vmin / cos(30deg));
+  left: 50%;
+  transform-origin: center left;
+  transform: translateX(-50%) rotate(60deg) skewY(-30deg);
+  border-width: 0 0.2rem calc(0.2rem / cos(30deg)) 0;
+  border-color: #aaa;
+  border-style: solid;
+  z-index: 0;
+}
+
+.section-icon {
+  display: inline-block;
+  height: 2rem;
+}
+
+@media (max-aspect-ratio: 1 / 1) {
+  #ks-case {
+    width: 100%;
+  }
+
+  #ks-center {
+    display: initial;
+  }
+
+  #ks-left {
+    display: none;
+  }
+}
+
+@media (max-aspect-ratio: 2 / 3) {
+  #headshot, #headshot-dark {
+    width: 100lvw;
+    left: 0;
+    top: calc(100lvh - 100lvw);
+  }
+
+  #ks-below {
+    right: 0;
+    text-align: right;
+  }
+
+  #scroll-hint {
+    border-color: #000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body, #content {
+    background: #000;
+    color: white;
+  }
+
+  #headshot-dark {
+    display: initial;
+  }
+
+  #ks-center, #ks-left {
+    filter: invert(1);
+  }
+}
