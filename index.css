@@ -143,7 +143,7 @@ body {
 
 @media (max-aspect-ratio: 2 / 3) {
   #headshot, #headshot-dark {
-    width: 100lvw;
+    max-width: 100lvw;
     left: 0;
     top: calc(100lvh - 100lvw);
   }
