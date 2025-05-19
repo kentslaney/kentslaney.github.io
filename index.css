@@ -60,7 +60,9 @@ body {
 #ks-contain {
   aspect-ratio: var(--ks-contain-ratio);
   position: relative;
-  top: calc(var(--ks-case-height) / 2);
+  top: calc(1 / 2 * min(
+    var(--ks-case-width) / (var(--ks-cover-ratio)),
+    var(--ks-case-height)));
   transform: translateY(-50%);
 }
 
@@ -119,8 +121,8 @@ body {
   position: absolute;
   font-family: "Roboto", Arial;
   font-size: calc(min(
-    var(--ks-case-width) / var(--ks-contain-ratio),
-    var(--ks-case-height) * var(--ks-cover-ratio) / var(--ks-contain-ratio)));
+    var(--ks-case-width) / (var(--ks-contain-ratio)),
+    var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio))));
   font-weight: 600;
   transform: scale(107%, 95%) translate(5%, -17%);
   opacity: 0.5

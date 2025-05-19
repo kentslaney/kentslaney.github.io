@@ -1,1 +1,4 @@
-.?v?env
+.env
+.venv
+env/
+venv/
