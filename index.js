@@ -48,7 +48,7 @@ window.addEventListener("load", () => {
   const scroll = () => {
     const { _, height } = container.getBoundingClientRect();
     const pos = window.scrollY / (window.innerHeight + height)
-    if (pos > 0.1) selectable.classList.add("hidden")
+    if (pos > 0.05) selectable.classList.add("hidden")
     else selectable.classList.remove("hidden")
     if (pos > 0.65) container.classList.add("icon-svg")
     else container.classList.remove("icon-svg")
