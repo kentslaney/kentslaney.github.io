@@ -60,7 +60,7 @@ body {
 #ks-contain {
   aspect-ratio: var(--ks-contain-ratio);
   position: relative;
-  top: 50%;
+  top: calc(var(--ks-case-height) / 2);
   transform: translateY(-50%);
 }
 
