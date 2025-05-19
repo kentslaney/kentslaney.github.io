@@ -46,7 +46,8 @@ window.addEventListener("load", () => {
   const selectable = document.querySelector("#ks-select")
   const container = document.querySelector("#ks-case")
   const scroll = () => {
-    const pos = window.scrollY / window.innerHeight
+    const { _, height } = container.getBoundingClientRect();
+    const pos = window.scrollY / (window.innerHeight + height)
     if (pos > 0.1) selectable.classList.add("hidden")
     else selectable.classList.remove("hidden")
     if (pos > 0.65) container.classList.add("icon-svg")

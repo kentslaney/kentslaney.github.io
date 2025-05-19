@@ -115,6 +115,7 @@ body {
   height: 3rem;
   float: left;
   margin: 0 1rem 0 0;
+  pointer-events: none;
 }
 
 #ks-select {
