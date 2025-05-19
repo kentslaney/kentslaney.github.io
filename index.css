@@ -148,6 +148,10 @@ body {
   #ks-left {
     display: none;
   }
+
+  #ks-svg {
+    left: 37.6%;
+  }
 }
 
 @media (max-aspect-ratio: 2 / 3) {
