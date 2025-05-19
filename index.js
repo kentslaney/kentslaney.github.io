@@ -49,7 +49,7 @@ window.addEventListener("load", () => {
     const pos = window.scrollY / window.innerHeight
     if (pos > 0.1) selectable.classList.add("hidden")
     else selectable.classList.remove("hidden")
-    if (pos > 0.6) container.classList.add("icon-svg")
+    if (pos > 0.65) container.classList.add("icon-svg")
     else container.classList.remove("icon-svg")
   }
   window.addEventListener("scroll", scroll, { passive: true })
