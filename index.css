@@ -126,8 +126,14 @@ body {
   opacity: 0.5
 }
 
-.hidden {
+.hidden, .icon-svg > lottie-player, #ks-case:not(.icon-svg) #ks-svg {
   visibility: hidden;
+}
+
+#ks-svg {
+  position: absolute;
+  height: 100%;
+  transform: scale(68%) translate(-5%, -17%);
 }
 
 @media (max-aspect-ratio: 1 / 1) {
@@ -176,7 +182,7 @@ body {
     display: initial;
   }
 
-  #ks-center, #ks-left, .section-icon {
+  #ks-center, #ks-left, #ks-svg, .section-icon {
     filter: invert(1);
   }
 

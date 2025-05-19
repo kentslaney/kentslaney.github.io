@@ -43,10 +43,15 @@ window.addEventListener("load", () => {
       },
     ]
   });
-  selectable = document.querySelector("#ks-select")
-  window.addEventListener("scroll", () => {
+  const selectable = document.querySelector("#ks-select")
+  const container = document.querySelector("#ks-case")
+  const scroll = () => {
     const pos = window.scrollY / window.innerHeight
     if (pos > 0.1) selectable.classList.add("hidden")
     else selectable.classList.remove("hidden")
-  }, { passive: true })
+    if (pos > 0.6) container.classList.add("icon-svg")
+    else container.classList.remove("icon-svg")
+  }
+  window.addEventListener("scroll", scroll, { passive: true })
+  scroll()
 })
