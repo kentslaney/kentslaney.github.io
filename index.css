@@ -149,7 +149,7 @@ body {
   top: calc(-100vh * var(--ks-interpolation) * (
     var(--ks-offset) + var(--ks-height) * var(--end-pad)));
   width: 100%;
-  transform-origin: center left;
+  transform-origin: 2% center;
 }
 
 #content {
