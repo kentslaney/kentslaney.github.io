@@ -132,6 +132,16 @@ body {
   transform: scale(68%) translate(-5%, -17%);
 }
 
+.icon-svg #debug {
+  position: absolute;
+  height: 125%;
+  transform: translate(-2%, -18%);
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  z-index: -1;
+  border: 2px solid #aaa;
+}
+
 #ks-icon {
   --ks-height: calc(min(
     var(--page-ratio) * var(--ks-case-width) / (var(--ks-contain-ratio)),
@@ -192,6 +202,10 @@ iframe {
 
   #ks-svg {
     left: 37.6%;
+  }
+
+  .icon-svg #debug {
+    display: none;
   }
 }
 
