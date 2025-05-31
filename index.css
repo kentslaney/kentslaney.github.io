@@ -235,3 +235,11 @@ iframe {
     background: #00000080
   }
 }
+
+@media (height < 40rem) {
+  #ks-below > a {
+    font-size: 0;
+    padding: 0;
+    display: inline-block;
+  }
+}
