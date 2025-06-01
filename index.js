@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
   LottieInteractivity.create({
     player: "#ks-left",
     mode:"scroll",
@@ -51,7 +51,7 @@ window.addEventListener("load", () => {
   const scroll = () => {
     const { top } = container.getBoundingClientRect();
     const pos = (window.innerHeight - top) / window.innerHeight
-    parent.style.setProperty("--splash-scroll", pos)
+    document.documentElement.style.setProperty("--splash-scroll", pos)
     if (pos > 0.05) selectable.classList.add("hidden")
     else selectable.classList.remove("hidden")
     if (pos > iconSwitch) parent.classList.add("icon-svg")

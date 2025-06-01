@@ -3,15 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script type="text/javascript" src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <script type="text/javascript" src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
   <script src="index.js"></script>
   <link rel="stylesheet" href="index.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
 </head>
 <body>
-  <script type="text/javascript" src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <script type="text/javascript">
+    (async () => {
+      document.body.classList.add("roboto-fellback")
+      try {
+        await document.fonts.load('1em "Roboto"');
+        document.body.classList.remove("roboto-fellback")
+      } catch {}
+    })();
+  </script>
   <div id="ks-case">
     <lottie-player id="ks-left" src="left.json"></lottie-player>
     <lottie-player id="ks-center" src="center.json"></lottie-player>
@@ -51,6 +60,9 @@
   <img id="headshot-dark" src="headshot-dark.png">
   <div id="scroll-index"></div>
   <div id="content">
+    <div id="portrait-header">
+      <embed id="ks-header" src="icon.svg">
+    </div>
     <div id="projects">(projects still under construction: this site)</div>
     <div id="adventures">
       <a href="36322328065_8267927317_o.jpg">Source</a>

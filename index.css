@@ -6,6 +6,24 @@
   --ks-cover-ratio: 7775 / 3888;
   --ks-contain-ratio: 6 / 1;
   --ks-switch: 0.65;
+  --ks-end-scale: 0.5;
+  --ks-end-pad: 0.1;
+  --divider: #aaa;
+  --ks-rescale: 68%;
+
+  /* js modified defaults */
+  --splash-scroll: 0;
+  --page-ratio: 1;
+
+  /* computed */
+  --ks-height: calc(min(
+    var(--page-ratio) * var(--ks-case-width) / (var(--ks-contain-ratio)),
+    var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio))));
+  --ks-offset: calc((var(--ks-case-height) / 2 - var(--ks-height) / 2));
+  --header-height: calc(
+    var(--ks-height) * (var(--ks-end-scale) + 2 * var(--ks-end-pad)));
+  --ks-interpolation: calc(min(max((var(--splash-scroll) - var(--ks-switch)) /
+    (1 - var(--header-height) - var(--ks-switch)), 0), 1));
 }
 
 body {
@@ -97,7 +115,7 @@ body {
   transform-origin: center left;
   transform: translateX(-50%) rotate(60deg) skewY(-30deg);
   border-width: 0 0.2rem calc(0.2rem / cos(30deg)) 0;
-  border-color: #aaa;
+  border-color: var(--divider);
   border-style: solid;
   z-index: 0;
 }
@@ -122,6 +140,10 @@ body {
   opacity: 0.5
 }
 
+.roboto-fellback #ks-select {
+  transform: scale(99%, 99%) translate(1%, -16%);
+}
+
 .hidden, .icon-svg > lottie-player, #ks-case:not(.icon-svg) #ks-svg {
   visibility: hidden;
 }
@@ -129,25 +151,15 @@ body {
 #ks-svg {
   position: absolute;
   height: 100%;
-  transform: scale(68%) translate(-5%, -17%);
+  transform: scale(var(--ks-rescale)) translate(-5%, -17%);
 }
 
 #ks-icon {
-  --ks-height: calc(min(
-    var(--page-ratio) * var(--ks-case-width) / (var(--ks-contain-ratio)),
-    var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio))));
-  --ks-offset: calc(var(--ks-case-height) / 2 - var(--ks-height) / 2);
-  --end-scale: 0.5;
-  --end-pad: 0.1;
-  --ks-interpolation: calc(min(max((var(--splash-scroll) - var(--ks-switch)) /
-    (1 - var(--ks-height) * (var(--end-scale) + 2 * var(--end-pad)) -
-      var(--ks-switch)), 0), 1));
-
   position: absolute;
   height: 100%;
-  scale: calc(1 - (1 - var(--end-scale)) * var(--ks-interpolation));
+  scale: calc(1 - (1 - var(--ks-end-scale)) * var(--ks-interpolation));
   top: calc(-100vh * var(--ks-interpolation) * (
-    var(--ks-offset) + var(--ks-height) * var(--end-pad)));
+    var(--ks-offset) + var(--ks-height) * var(--ks-end-pad)));
   width: 100%;
   transform-origin: 2% center;
 }
@@ -158,7 +170,7 @@ body {
   position: relative;
   z-index: 1;
   background: white;
-  border-top: 1px solid #aaa;
+  border-top: 1px solid var(--divider);
   text-align: center;
   font-size: 1.5rem;
   line-height: 2.5rem;
@@ -173,9 +185,20 @@ iframe {
     max-width: 100vw;
 }
 
+#portrait-header {
+  display: none;
+}
+
+#ks-header {
+  height: calc(100vh * var(--ks-height) * var(--ks-end-scale));
+  margin-top: calc(100vh * var(--ks-height) * var(--ks-end-pad));
+  scale: var(--ks-rescale);
+}
+
 @media (max-aspect-ratio: 1 / 1) {
-  #ks-case {
+  :root {
     --ks-case-width: 1;
+    --headshot-pad: calc(-1 * var(--headshot-width));
   }
 
   #ks-center {
@@ -187,7 +210,7 @@ iframe {
   }
 
   #ks-icon {
-    transform-origin: center;
+    transform-origin: 52% center;
   }
 
   #ks-svg {
@@ -241,5 +264,24 @@ iframe {
     font-size: 0;
     padding: 0;
     display: inline-block;
+  }
+}
+
+@media (orientation: portrait) {
+  :root {
+    scroll-padding-top: calc(100vh * var(--header-height));
+  }
+
+  #portrait-header {
+    display: block;
+    position: fixed;
+    height: calc(100vh * var(--header-height));
+    top: 0;
+    width: 100%;
+    background: white;
+    border-bottom: 1px solid var(--divider);
+    opacity: calc(round(down, var(--ks-interpolation)));
+    margin-top: -1px;
+    overflow: hidden;
   }
 }
