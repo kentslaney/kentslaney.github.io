@@ -250,7 +250,7 @@ iframe {
     display: initial;
   }
 
-  #ks-center, #ks-left, #ks-svg, .section-icon {
+  #ks-center, #ks-left, #ks-svg, #ks-header, .section-icon {
     filter: invert(1);
   }
 
@@ -278,7 +278,7 @@ iframe {
     height: calc(100vh * var(--header-height));
     top: 0;
     width: 100%;
-    background: white;
+    background: inherit;
     border-bottom: 1px solid var(--divider);
     opacity: calc(round(down, var(--ks-interpolation)));
     margin-top: -1px;
