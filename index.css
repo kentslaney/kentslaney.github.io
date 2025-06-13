@@ -13,7 +13,7 @@
   --divider: #aaa;
   --ks-rescale: 0.68;
   --feed-width: 1280;
-  --ks-origin-left: 0.02;
+  --sidebar-pad: 2;
 
   /* js modified defaults */
   --splash-scroll: 0;
@@ -23,7 +23,7 @@
   /* computed */
   --icon-over-logo: calc(
     var(--ks-icon-ratio) / (var(--ks-contain-ratio)) * var(--ks-rescale) *
-    var(--ks-end-scale));
+    var(--ks-end-scale) * var(--sidebar-pad));
   --logo-width: calc(min(var(--ks-case-width),
     (var(--ks-case-width) - 0.5 + var(--feed-width) / var(--page-width) / 2) /
     (1 - (var(--icon-over-logo)) / 2)));
@@ -173,7 +173,7 @@ body {
   top: calc(-100vh * var(--ks-interpolation) * (
     var(--ks-offset) + var(--ks-height) * var(--ks-end-pad)));
   width: 100%;
-  transform-origin: calc(100% * var(--ks-origin-left)) center;
+  transform-origin: 2% center;
 }
 
 #content {
