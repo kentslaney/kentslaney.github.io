@@ -3,6 +3,7 @@
   --ks-case-height: 0.5;
   --headshot-width: 35vw;
   --headshot-pad: 5vw;
+  --headshot-max: 85vh;
   --ks-cover-ratio: 7775 / 3888;
   --ks-contain-ratio: 6 / 1;
   --ks-switch: 0.65;
@@ -40,9 +41,9 @@ body {
 
 #headshot, #headshot-dark {
   position: fixed;
-  top: calc(max(0px, 100vh - var(--headshot-width)));
+  top: calc(100vh - min(var(--headshot-max), var(--headshot-width)));
   max-width: var(--headshot-width);
-  max-height: 100vh;
+  max-height: var(--headshot-max);
   left: calc(100vw * var(--ks-case-width) + var(--headshot-pad));
   z-index: -1;
 }
