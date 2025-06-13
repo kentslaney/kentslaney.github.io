@@ -62,6 +62,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const resize = () => {
     document.documentElement.style.setProperty(
       "--page-ratio", window.innerWidth / window.innerHeight)
+    document.documentElement.style.setProperty(
+      "--page-width", window.innerWidth)
   }
   window.addEventListener("resize", resize, { passive: true })
   resize()

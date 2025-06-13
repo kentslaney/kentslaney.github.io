@@ -6,19 +6,29 @@
   --headshot-max: 85vh;
   --ks-cover-ratio: 7775 / 3888;
   --ks-contain-ratio: 6 / 1;
+  --ks-icon-ratio: 115.195 / 86.3;
   --ks-switch: 0.65;
   --ks-end-scale: 0.5;
   --ks-end-pad: 0.1;
   --divider: #aaa;
-  --ks-rescale: 68%;
+  --ks-rescale: 0.68;
+  --feed-width: 1280;
+  --ks-origin-left: 0.02;
 
   /* js modified defaults */
   --splash-scroll: 0;
   --page-ratio: 1;
+  --page-width: var(--feed-width);
 
   /* computed */
+  --icon-over-logo: calc(
+    var(--ks-icon-ratio) / (var(--ks-contain-ratio)) * var(--ks-rescale) *
+    var(--ks-end-scale));
+  --logo-width: calc(min(var(--ks-case-width),
+    (var(--ks-case-width) - 0.5 + var(--feed-width) / var(--page-width) / 2) /
+    (1 - (var(--icon-over-logo)) / 2)));
   --ks-height: calc(min(
-    var(--page-ratio) * var(--ks-case-width) / (var(--ks-contain-ratio)),
+    var(--page-ratio) * var(--logo-width) / (var(--ks-contain-ratio)),
     var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio))));
   --ks-offset: calc((var(--ks-case-height) / 2 - var(--ks-height) / 2));
   --header-height: calc(
@@ -33,7 +43,8 @@ body {
 
 #ks-case {
   display: inline-block;
-  width: calc(100vw * var(--ks-case-width));
+  width: calc(100vw * var(--logo-width));
+  left: calc(100vw * (var(--ks-case-width) - var(--logo-width)));
   position: fixed;
   height: calc(100vh * var(--ks-case-height));
   top: 0;
@@ -81,7 +92,7 @@ body {
   aspect-ratio: var(--ks-contain-ratio);
   position: relative;
   top: calc(1 / 2 * min(
-    100vw * var(--ks-case-width) / (var(--ks-cover-ratio)),
+    100vw * var(--logo-width) / (var(--ks-cover-ratio)),
     100vh * var(--ks-case-height)));
   transform: translateY(-50%);
 }
@@ -133,7 +144,7 @@ body {
   position: absolute;
   font-family: "Roboto", Arial;
   font-size: calc(min(
-    100vw * var(--ks-case-width) / (var(--ks-contain-ratio)),
+    100vw * var(--logo-width) / (var(--ks-contain-ratio)),
     100vh * var(--ks-case-height) * var(--ks-cover-ratio) /
         (var(--ks-contain-ratio))));
   font-weight: 600;
@@ -162,7 +173,7 @@ body {
   top: calc(-100vh * var(--ks-interpolation) * (
     var(--ks-offset) + var(--ks-height) * var(--ks-end-pad)));
   width: 100%;
-  transform-origin: 2% center;
+  transform-origin: calc(100% * var(--ks-origin-left)) center;
 }
 
 #content {
@@ -178,8 +189,15 @@ body {
 }
 
 #content img {
-    max-width: 100vw;
-    max-height: 100vh;
+  max-width: 100%;
+  max-height: 100vh;
+}
+
+#feed {
+  max-width: calc(var(--feed-width) * 1px);
+  margin: 0 auto;
+  padding-left: calc(
+    100vw * (var(--icon-over-logo)) * var(--logo-width));
 }
 
 iframe {
@@ -284,5 +302,9 @@ iframe {
     opacity: calc(round(down, var(--ks-interpolation)));
     margin-top: -1px;
     overflow: hidden;
+  }
+
+  #feed {
+    padding-left: 0;
   }
 }
