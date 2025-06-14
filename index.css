@@ -1,3 +1,9 @@
+/** /
+* {
+  border: 1px solid red;
+}
+/**/
+
 :root {
   --ks-case-width: 0.6;
   --ks-case-height: 0.5;
@@ -72,20 +78,12 @@ body {
   display: none;
 }
 
-#ks-container {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
-
 #ks-cover {
   aspect-ratio: var(--ks-cover-ratio);
   max-height: 100%;
   position: relative;
-  left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
 }
 
 #ks-contain {
@@ -156,8 +154,12 @@ body {
   transform: scale(99%, 99%) translate(1%, -16%);
 }
 
-.hidden, .icon-svg > lottie-player, #ks-case:not(.icon-svg) #ks-svg {
+.hidden, .icon-svg lottie-player, #ks-case:not(.icon-svg) #ks-svg {
   visibility: hidden;
+}
+
+lottie-player {
+  position: absolute;
 }
 
 #ks-svg {
