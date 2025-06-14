@@ -19,7 +19,7 @@
   --divider: #aaa;
   --ks-rescale: 0.68;
   --feed-width: 1280;
-  --sidebar-pad: 2;
+  --sidebar-pad: 1;
 
   /* js modified defaults */
   --splash-scroll: 0;
@@ -328,6 +328,6 @@ iframe {
   }
 
   #landscape-sidebar {
-    display: none;
+    display: none !important;
   }
 }
