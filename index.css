@@ -1,4 +1,4 @@
-/** /
+/**/
 * {
   border: 1px solid red;
 }
@@ -23,18 +23,29 @@
 
   /* js modified defaults */
   --splash-scroll: 0;
-  --page-ratio: 1;
   --page-width: var(--feed-width);
+  --page-height: var(--feed-width);
 
   /* computed */
   --icon-over-logo: calc(
     var(--ks-icon-ratio) / (var(--ks-contain-ratio)) * var(--ks-rescale) *
     var(--ks-end-scale) * var(--sidebar-pad));
-  --logo-width: calc(min(var(--ks-case-width),
+  --tmp2: calc(var(--page-height) / var(--page-width) *
+    var(--ks-case-height) * var(--ks-cover-ratio));
+  --tmp: calc(var(--ks-case-width) - 0.5 + (
+    var(--feed-width) / var(--page-width) + var(--tmp2)) / 2);
+  --tmp3: calc(
     (var(--ks-case-width) - 0.5 + var(--feed-width) / var(--page-width) / 2) /
-    (1 - (var(--icon-over-logo)) / 2)));
+    (1 - (var(--icon-over-logo)) / 2));
+  /* --case-width: calc(min(var(--ks-case-width), min(var(--tmp), var(--tmp3)))); */
+  --case-width: calc(min(var(--ks-case-width), var(--tmp)));
+  --tmp4: calc((sign(var(--tmp3) - (var(--tmp))) + 1) / 2);
+  --tmp5: calc(
+    var(--tmp3) * var(--icon-over-logo) * (1 - var(--tmp4)) +
+    var(--tmp2) * var(--tmp4));
   --ks-height: calc(min(
-    var(--page-ratio) * var(--logo-width) / (var(--ks-contain-ratio)),
+    var(--page-width) / var(--page-height) * var(--case-width) / (
+      var(--ks-contain-ratio)),
     var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio))));
   --ks-offset: calc((var(--ks-case-height) / 2 - var(--ks-height) / 2));
   --header-height: calc(
@@ -49,8 +60,8 @@ body {
 
 #ks-case {
   display: inline-block;
-  width: calc(100vw * var(--logo-width));
-  left: calc(100vw * (var(--ks-case-width) - var(--logo-width)));
+  width: calc(100vw * var(--case-width));
+  left: calc(100vw * (var(--ks-case-width) - var(--case-width)));
   position: fixed;
   height: calc(100vh * var(--ks-case-height));
   top: 0;
@@ -90,7 +101,7 @@ body {
   aspect-ratio: var(--ks-contain-ratio);
   position: relative;
   top: calc(1 / 2 * min(
-    100vw * var(--logo-width) / (var(--ks-cover-ratio)),
+    100vw * var(--case-width) / (var(--ks-cover-ratio)),
     100vh * var(--ks-case-height)));
   transform: translateY(-50%);
 }
@@ -142,7 +153,7 @@ body {
   position: absolute;
   font-family: "Roboto", Arial;
   font-size: calc(min(
-    100vw * var(--logo-width) / (var(--ks-contain-ratio)),
+    100vw * var(--case-width) / (var(--ks-contain-ratio)),
     100vh * var(--ks-case-height) * var(--ks-cover-ratio) /
         (var(--ks-contain-ratio))));
   font-weight: 600;
@@ -199,7 +210,7 @@ lottie-player {
 #feed {
   max-width: calc(var(--feed-width) * 1px);
   margin: 0 auto;
-  padding-left: calc(100vw * (var(--icon-over-logo)) * var(--logo-width));
+  padding-left: calc(100vw * (var(--tmp5)));
 }
 
 iframe {
@@ -219,7 +230,7 @@ iframe {
   display: none;
   position: fixed;
   top: calc(100vh * (1 - min(1, var(--splash-scroll))));
-  margin-left: calc(-100vw * (var(--icon-over-logo)) * var(--logo-width));
+  margin-left: calc(-100vw * (var(--tmp5)));
   overflow: hidden;
 }
 
