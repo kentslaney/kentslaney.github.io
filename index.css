@@ -31,14 +31,14 @@
     var(--ks-icon-ratio) / (var(--ks-contain-ratio)) * var(--ks-rescale) *
     var(--ks-end-scale) * var(--sidebar-pad));
   --tmp2: calc(var(--page-height) / var(--page-width) *
-    var(--ks-case-height) * var(--ks-cover-ratio));
+    var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio)) *
+    var(--ks-icon-ratio) * var(--ks-rescale) * var(--ks-end-scale));
   --tmp: calc(var(--ks-case-width) - 0.5 + (
     var(--feed-width) / var(--page-width) + var(--tmp2)) / 2);
   --tmp3: calc(
     (var(--ks-case-width) - 0.5 + var(--feed-width) / var(--page-width) / 2) /
     (1 - (var(--icon-over-logo)) / 2));
-  /* --case-width: calc(min(var(--ks-case-width), min(var(--tmp), var(--tmp3)))); */
-  --case-width: calc(min(var(--ks-case-width), var(--tmp)));
+  --case-width: calc(min(var(--ks-case-width), min(var(--tmp), var(--tmp3))));
   --tmp4: calc((sign(var(--tmp3) - (var(--tmp))) + 1) / 2);
   --tmp5: calc(
     var(--tmp3) * var(--icon-over-logo) * (1 - var(--tmp4)) +
