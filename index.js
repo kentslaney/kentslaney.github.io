@@ -50,8 +50,9 @@ window.addEventListener("DOMContentLoaded", () => {
     .getPropertyValue("--ks-switch")
   const scroll = () => {
     const { top } = container.getBoundingClientRect();
-    const pos = (window.innerHeight - top) / window.innerHeight
-    document.documentElement.style.setProperty("--splash-scroll", pos)
+    const diff = window.innerHeight - top
+    const pos = diff / window.innerHeight
+    document.documentElement.style.setProperty("--splash-scroll", diff)
     if (pos > 0.05) selectable.classList.add("hidden")
     else selectable.classList.remove("hidden")
     if (pos > iconSwitch) parent.classList.add("icon-svg")

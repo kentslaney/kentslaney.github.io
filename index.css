@@ -19,7 +19,7 @@
   --divider: #aaa;
   --ks-rescale: 0.68;
   --feed-width: 1280;
-  --sidebar-pad: 1;
+  --sidebar-pad: 1.31;
 
   /* js modified defaults */
   --splash-scroll: 0;
@@ -32,7 +32,8 @@
     var(--ks-end-scale) * var(--sidebar-pad));
   --icon-y-fix: calc(var(--page-height) / var(--page-width) *
     var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio)) *
-    var(--ks-icon-ratio) * var(--ks-rescale) * var(--ks-end-scale));
+    var(--ks-icon-ratio) * var(--ks-rescale) * var(--ks-end-scale) *
+    var(--sidebar-pad));
   --case-y-fix: calc(var(--ks-case-width) - 0.5 + (
     var(--feed-width) / var(--page-width) + var(--icon-y-fix)) / 2);
   --case-x-fix: calc(
@@ -43,13 +44,13 @@
   --icon-final: calc(
     min(var(--case-x-fix) * var(--icon-over-logo), var(--icon-y-fix)));
   --ks-height: calc(min(
-    var(--page-width) / var(--page-height) * var(--case-width) / (
-      var(--ks-contain-ratio)),
-    var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio))));
+    var(--page-width) / var(--page-height) * var(--case-width),
+    var(--ks-case-height) * var(--ks-cover-ratio)) / (var(--ks-contain-ratio)));
   --ks-offset: calc((var(--ks-case-height) / 2 - var(--ks-height) / 2));
   --header-height: calc(
     var(--ks-height) * (var(--ks-end-scale) + 2 * var(--ks-end-pad)));
-  --ks-interpolation: calc(min(max((var(--splash-scroll) - var(--ks-switch)) /
+  --rel-scroll: calc(var(--splash-scroll) / var(--page-height));
+  --ks-interpolation: calc(min(max((var(--rel-scroll) - var(--ks-switch)) /
     (1 - var(--header-height) - var(--ks-switch)), 0), 1));
 }
 
@@ -222,15 +223,15 @@ iframe {
 
 #sidebar-container {
   position: relative;
-  margin-top: calc(-100vh * (1 - min(1, var(--splash-scroll))));
+  margin-top: calc(-100vh * (1 - min(1, var(--rel-scroll))));
 }
 
 #landscape-sidebar {
   display: none;
   position: fixed;
-  top: calc(100vh * (1 - min(1, var(--splash-scroll))));
-  margin-left: calc(-100vw * (var(--icon-final)));
-  overflow: hidden;
+  top: calc(100vh * (1 - min(1, var(--rel-scroll))));
+  margin-left: calc(-100vw * (var(--icon-final)) / var(--sidebar-pad));
+  overflow-y: hidden;
 }
 
 .icon-svg ~ #content #landscape-sidebar {
@@ -238,9 +239,10 @@ iframe {
 }
 
 #ks-header {
-  height: calc(100vh * var(--ks-height) * var(--ks-end-scale));
-  margin-top: calc(100vh * var(--ks-height) * var(--ks-end-pad));
-  scale: var(--ks-rescale);
+  height: calc(
+    100vh * var(--ks-height) * var(--ks-end-scale) * var(--ks-rescale));
+  margin-top: calc(100vh * var(--ks-height) * (
+    var(--ks-end-pad) + var(--ks-end-scale) * (1 - var(--ks-rescale)) / 2));
 }
 
 @media (max-aspect-ratio: 1 / 1) {
