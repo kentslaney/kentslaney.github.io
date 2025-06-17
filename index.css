@@ -19,7 +19,7 @@
   --divider: #aaa;
   --ks-rescale: 0.68;
   --feed-width: 1280;
-  --sidebar-pad: 1.32;
+  --sidebar-pad: 0.32;
 
   /* js modified defaults */
   --splash-scroll: 0;
@@ -27,13 +27,17 @@
   --page-height: var(--feed-width);
 
   /* computed */
+  --sidebar-right: calc(
+    (var(--ks-end-pad) + var(--ks-end-scale) * (1 - var(--ks-rescale)) / 2) /
+    (var(--ks-end-scale) * var(--ks-rescale)));
+  --sidebar-total: calc(1 + var(--sidebar-pad) + var(--sidebar-right));
   --icon-over-logo: calc(
     var(--ks-icon-ratio) / (var(--ks-contain-ratio)) * var(--ks-rescale) *
-    var(--ks-end-scale) * var(--sidebar-pad));
+    var(--ks-end-scale) * var(--sidebar-total));
   --icon-y-fix: calc(var(--page-height) / var(--page-width) *
     var(--ks-case-height) * var(--ks-cover-ratio) / (var(--ks-contain-ratio)) *
     var(--ks-icon-ratio) * var(--ks-rescale) * var(--ks-end-scale) *
-    var(--sidebar-pad));
+    var(--sidebar-total));
   --case-y-fix: calc(var(--ks-case-width) - 0.5 + (
     var(--feed-width) / var(--page-width) + var(--icon-y-fix)) / 2);
   --case-x-fix: calc(
@@ -230,7 +234,8 @@ iframe {
   display: none;
   position: fixed;
   top: calc(100vh * (1 - min(1, var(--rel-scroll))));
-  margin-left: calc(-100vw * (var(--icon-final)) / var(--sidebar-pad));
+  margin-left: calc(-100vw * (var(--icon-final)) *
+    (1 + var(--sidebar-right)) / (var(--sidebar-total)));
   overflow-y: hidden;
 }
 
