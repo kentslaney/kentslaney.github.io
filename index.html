@@ -6,47 +6,40 @@
   <script type="text/javascript" src="https://github.com/kentslaney/lottie-player/releases/download/v2.0.1/lottie-player.js"></script>
   <script type="text/javascript" src="https://github.com/kentslaney/lottie-interactivity/releases/download/v1.5.3-alpha/lottie-interactivity.min.js"></script>
   <script src="index.js"></script>
-  <link rel="stylesheet" href="index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
+  <link rel="stylesheet" href="index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" />
 </head>
 <body>
-  <script type="text/javascript">
-    (async () => {
-      document.body.classList.add("roboto-fellback")
-      try {
-        await document.fonts.load('1em "Roboto"');
-        document.body.classList.remove("roboto-fellback")
-      } catch {}
-    })();
-  </script>
   <div id="ks-case">
     <div id="ks-cover">
       <lottie-player id="ks-left" src="left.json"></lottie-player>
       <lottie-player id="ks-center" src="center.json"></lottie-player>
       <div id="ks-contain">
-        <div id="ks-icon"><embed id="ks-svg" src="icon.svg"></div>
+        <div id="ks-icon">
+          <embed id="ks-svg" src="icon.svg" />
+        </div>
         <div id="ks-select">Kent Slaney</div>
         <div id="ks-below">
           <a href="#projects">
-            <embed class="section-icon" src="source-code.svg">
+            <embed class="section-icon" src="source-code.svg" />
             Projects
           </a>
           <a href="#adventures">
-            <embed class="section-icon" src="picture-one.svg">
+            <embed class="section-icon" src="picture-one.svg" />
             Adventures
           </a>
-          <a href="#content">
-            <embed class="section-icon" src="museum-two.svg">
+          <a href="#education">
+            <embed class="section-icon" src="museum-two.svg" />
             Education
           </a>
-          <a href="#content">
-            <embed class="section-icon" src="network-tree.svg">
+          <a href="#employment">
+            <embed class="section-icon" src="network-tree.svg" />
             Employment
           </a>
-          <a href="#content">
-            <embed class="section-icon" src="communication.svg">
+          <a href="#contact">
+            <embed class="section-icon" src="communication.svg" />
             Contact
           </a>
         </div>
@@ -54,26 +47,56 @@
     </div>
   </div>
   <div id="scroll-hint"></div>
-  <img id="headshot" src="headshot.png">
-  <img id="headshot-dark" src="headshot-dark.png">
-  <div id="scroll-index"></div>
+  <img id="headshot" src="headshot.png" />
+  <img id="headshot-dark" src="headshot-dark.png" />
+  <div id="scroll-index">
+    <div id="splash"></div>
+  </div>
   <div id="content">
     <div id="portrait-header">
-      <embed id="ks-header" src="icon.svg">
+      <embed id="ks-header" src="icon.svg" />
     </div>
     <div id="feed">
       <div id="landscape-sidebar">
         <div id="sidebar-container">
-          <embed id="ks-header" src="icon.svg">
+          <div id="active-section-outer">
+            <div id="active-section-inner">
+              <div id="active-section"></div>
+            </div>
+          </div>
+          <a href="#splash" id="ks-circle">
+            <embed id="ks-side-header" src="icon.svg" />
+          </a>
+          <a href="#projects" class="side-section">
+            <embed class="section-icon" src="source-code.svg" />
+          </a>
+          <a href="#adventures" class="side-section">
+            <embed class="section-icon" src="picture-one.svg" />
+          </a>
+          <a href="#education" class="side-section">
+            <embed class="section-icon" src="museum-two.svg" />
+          </a>
+          <a href="#employment" class="side-section">
+            <embed class="section-icon" src="network-tree.svg" />
+          </a>
+          <a href="#contact" class="side-section">
+            <embed class="section-icon" src="communication.svg" />
+          </a>
         </div>
       </div>
-      <div id="projects">(projects still under construction: this site)</div>
+      <div id="projects">
+        (projects still under construction: this site)
+      </div>
       <div id="adventures">
         <a href="36322328065_8267927317_o.jpg">Source</a>
         by
-        <a href="618973C9-0CF4-4915-80E9-8FA7DBD53B77.JPG">Kaija Xiao (sister)</a>
+        <a href="618973C9-0CF4-4915-80E9-8FA7DBD53B77.JPG">
+          Kaija Xiao (sister)
+        </a>
         via
-        <a href="https://github.com/abhiskk/fast-neural-style">Style Transfer</a>
+        <a href="https://github.com/abhiskk/fast-neural-style">
+          Style Transfer
+        </a>
         (
         <a href="https://github.com/pytorch/examples/tree/main/fast_neural_style">
           latest
@@ -89,31 +112,45 @@
         <a href="https://raw.githubusercontent.com/abhiskk/fast-neural-style/refs/heads/master/images/style-images/starry-night-cropped.jpg">
           background
         </a>
+        <img src="out.png" />
+        <div>
+          Taken by an iPhone 5 on iOS 6.0.2, before panorama mode (
+          <a href="IMG_0429.JPG">left</a>,
+          <a href="IMG_0426.JPG">right</a>
+          )
+        </div>
+        <img src="hardrock05.jpg" />
+        <img src="IMG_1516.JPG" />
+        <img src="IMG_1543.JPG" />
+        <img src="IMG_0102.JPG" />
+        <img src="profile.jpg" />
+        <img src="IMG_20190704_194306.jpg" />
+        <img src="IMG_20200813_133356.jpg" />
+        <img src="IMG_20200813_190003.jpg" />
+        <img src="IMG_20200813_200154.jpg" />
+        <div>
+          2017
+          <a href="https://www.youtube.com/watch?v=EXOR91DjqAc">
+            reference guide
+          </a>:
+          Michael Howes (in the red at the start of the 2021 video)
+          <br />
+          2017 hard tail, 2021 full suspension
+        </div>
+        <iframe width="178" height="315" src="https://www.youtube.com/embed/7o8tLKHgtPE?si=nr3oWD_x73dgWzUQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/JwNGCNQgpBE?si=944VPqNr4mV3M5iB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
-      <img src="out.png" />
-      <div>
-        Taken by an iPhone 5 on iOS 6.0.2, before panorama mode (
-        <a href="IMG_0429.JPG">left</a>,
-        <a href="IMG_0426.JPG">right</a>
-        )
+      <div id="education">
+        MIT!
       </div>
-      <img src="hardrock05.jpg" />
-      <img src="IMG_1516.JPG" />
-      <img src="IMG_1543.JPG" />
-      <img src="IMG_0102.JPG" />
-      <img src="profile.jpg" />
-      <img src="IMG_20190704_194306.jpg" />
-      <img src="IMG_20200813_133356.jpg" />
-      <img src="IMG_20200813_190003.jpg" />
-      <img src="IMG_20200813_200154.jpg" />
-      <div>
-        2017
-        <a href="https://www.youtube.com/watch?v=EXOR91DjqAc">reference guide</a>:
-        Michael Howes (in the red at the start of the 2021 video)<br />
-        2017 hard tail, 2021 full suspension
+      <div id="employment">
+        check
+        <a href="https://www.linkedin.com/in/kentslaney/">LinkedIn</a>
+        for now
       </div>
-      <iframe width="178" height="315" src="https://www.youtube.com/embed/7o8tLKHgtPE?si=nr3oWD_x73dgWzUQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/JwNGCNQgpBE?si=944VPqNr4mV3M5iB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div id="contact">
+        kent@slaney.org
+      </div>
     </div>
   </div>
 </body>

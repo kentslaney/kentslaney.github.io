@@ -5,6 +5,7 @@
 /**/
 
 :root {
+  --background: #fff;
   --ks-case-width: 0.6;
   --ks-case-height: 0.5;
   --headshot-width: 35vw;
@@ -20,6 +21,10 @@
   --ks-rescale: 0.68;
   --feed-width: 1280;
   --sidebar-pad: 0.32;
+  --icon-pad: 1.337;
+  --section-menu-size: 3rem;
+  --active-section-marker-color: #ddd;
+  --active-section-marker-margin: 0.1;
 
   /* js modified defaults */
   --splash-scroll: 0;
@@ -45,17 +50,27 @@
     (1 - (var(--icon-over-logo)) / 2));
   --case-width: calc(min(var(--ks-case-width), min(
     var(--case-y-fix), var(--case-x-fix))));
-  --icon-final: calc(
+  --sidebar-final: calc(
     min(var(--case-x-fix) * var(--icon-over-logo), var(--icon-y-fix)));
   --ks-height: calc(min(
     var(--page-width) / var(--page-height) * var(--case-width),
     var(--ks-case-height) * var(--ks-cover-ratio)) / (var(--ks-contain-ratio)));
   --ks-offset: calc((var(--ks-case-height) / 2 - var(--ks-height) / 2));
+  --icon-final: calc(
+    var(--ks-height) * var(--ks-end-scale) * var(--ks-rescale) *
+    var(--ks-icon-ratio));
   --header-height: calc(
     var(--ks-height) * (var(--ks-end-scale) + 2 * var(--ks-end-pad)));
   --rel-scroll: calc(var(--splash-scroll) / var(--page-height));
   --ks-interpolation: calc(min(max((var(--rel-scroll) - var(--ks-switch)) /
     (1 - var(--header-height) - var(--ks-switch)), 0), 1));
+  --sidebar-top: calc(
+    var(--icon-final) * (var(--icon-pad)  - 1 / (var(--ks-icon-ratio))) / 2);
+  --icon-length: calc(100vh * var(--icon-final) * var(--icon-pad));
+  --active-section-marker-pad: calc(
+    var(--icon-length) * var(--active-section-marker-margin));
+  --side-section-icon-size: calc(
+    min(var(--section-menu-size), 100vh * var(--icon-final)));
 }
 
 body {
@@ -89,6 +104,14 @@ body {
   top: 100vh;
 }
 
+#splash {
+  margin-top: -100vh;
+  height: 100vh;
+  width: 100vw;
+  z-index: -1;
+  position: absolute;
+}
+
 #ks-center {
   display: none;
 }
@@ -115,7 +138,8 @@ body {
   top: 100%;
   padding: 2%;
   font-family: Helvetica;
-  font-size: 3rem;
+  font-size: var(--section-menu-size);
+  text-wrap: nowrap;
 }
 
 #ks-below > a {
@@ -124,7 +148,7 @@ body {
   color: inherit;
   padding: 1rem;
   text-wrap: nowrap;
-  background: #ffffff80
+  background: #ffffff80;
 }
 
 #ks-below > a:hover {
@@ -147,7 +171,11 @@ body {
 
 .section-icon {
   display: inline-block;
-  height: 3rem;
+  height: var(--side-section-icon-size);
+  pointer-events: none;
+}
+
+#ks-below .section-icon {
   float: left;
   margin: 0 1rem 0 0;
   pointer-events: none;
@@ -183,6 +211,10 @@ lottie-player {
   transform: scale(var(--ks-rescale)) translate(-5%, -17%);
 }
 
+#ks-svg, #headshot, #headshot-dark, #scroll-hint {
+  opacity: calc(1 - round(down, var(--ks-interpolation)));
+}
+
 #ks-icon {
   position: absolute;
   height: 100%;
@@ -198,7 +230,7 @@ lottie-player {
   min-height: 100vh;
   position: relative;
   z-index: 1;
-  background: white;
+  background: var(--background);
   border-top: 1px solid var(--divider);
   text-align: center;
   font-size: 1.5rem;
@@ -214,7 +246,7 @@ lottie-player {
 #feed {
   max-width: calc(var(--feed-width) * 1px);
   margin: 0 auto;
-  padding-left: calc(100vw * (var(--icon-final)));
+  padding-left: calc(100vw * (var(--sidebar-final)));
 }
 
 iframe {
@@ -225,29 +257,90 @@ iframe {
   display: none;
 }
 
-#sidebar-container {
-  position: relative;
-  margin-top: calc(-100vh * (1 - min(1, var(--rel-scroll))));
-}
-
 #landscape-sidebar {
-  display: none;
   position: fixed;
   top: calc(100vh * (1 - min(1, var(--rel-scroll))));
-  margin-left: calc(-100vw * (var(--icon-final)) *
-    (1 + var(--sidebar-right)) / (var(--sidebar-total)));
-  overflow-y: hidden;
+  margin-left: calc(-100vw * (var(--sidebar-final)) *
+    (1 + var(--sidebar-right) + (var(--icon-pad) - 1) / 2) /
+    (var(--sidebar-total)));
+  overflow-y: clip;
+  padding-bottom: var(--active-section-marker-pad);
 }
 
-.icon-svg ~ #content #landscape-sidebar {
+#sidebar-container {
+  position: relative;
+  margin-top: calc(100vh * (min(1, var(--rel-scroll)) - 1 + var(--ks-height) * (
+    var(--ks-end-pad) + var(--ks-end-scale) * (1 - var(--ks-rescale)) / 2) -
+    var(--sidebar-top)));
+  width: var(--icon-length);
+}
+
+#ks-circle {
   display: block;
+  background: var(--background);
+  border-radius: 100%;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  text-align: left;
+}
+
+#ks-header, #ks-side-header {
+  width: calc(100vh * var(--icon-final));
 }
 
 #ks-header {
-  height: calc(
-    100vh * var(--ks-height) * var(--ks-end-scale) * var(--ks-rescale));
   margin-top: calc(100vh * var(--ks-height) * (
     var(--ks-end-pad) + var(--ks-end-scale) * (1 - var(--ks-rescale)) / 2));
+}
+
+#ks-side-header {
+  margin: calc(100vh * var(--sidebar-top)) calc(
+    100vh * var(--icon-final) * (var(--icon-pad) - 1) / 2);
+  position: fixed;
+  opacity: calc(round(down, var(--ks-interpolation)));
+  pointer-events: none;
+}
+
+.side-section {
+  display: block;
+  width: 100%;
+  height: calc(var(--icon-length));
+  margin-top: var(--active-section-marker-pad);
+}
+
+.side-section > .section-icon {
+  margin: calc(50% - var(--side-section-icon-size) / 2) auto 0 auto;
+  line-height: 1;
+}
+
+#active-section-outer {
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  transition: height 0.2s ease-out;
+  height: calc(
+    var(--icon-length) * var(--section-max) +
+    var(--active-section-marker-pad) * (var(--section-max) - 1));
+}
+
+#active-section-inner {
+  position: absolute;
+  width: 100%;
+  transition: top 0.2s ease-in;
+  top: calc(var(--icon-length) * var(--section-min) +
+    var(--active-section-marker-pad) * var(--section-min));
+  bottom: 0;
+}
+
+#active-section {
+  position: absolute;
+  background: var(--active-section-marker-color);
+  top: calc(-1 * var(--active-section-marker-pad));
+  bottom: calc(-1 * var(--active-section-marker-pad));
+  left: calc(-1 * var(--active-section-marker-pad));
+  right: calc(-1 * var(--active-section-marker-pad));
+  border-radius: calc(var(--icon-length) * (
+    0.5 + var(--active-section-marker-margin)));
 }
 
 @media (max-aspect-ratio: 1 / 1) {
@@ -296,8 +389,13 @@ iframe {
 }
 
 @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000;
+    --active-section-marker-color: #444;
+  }
+
   body, #content {
-    background: #000;
+    background: var(--background);
     color: white;
   }
 
@@ -310,7 +408,7 @@ iframe {
   }
 
   #ks-below > a {
-    background: #00000080
+    background: #00000080;
   }
 }
 
@@ -327,7 +425,7 @@ iframe {
     scroll-padding-top: calc(100vh * var(--header-height));
   }
 
-  #portrait-header {
+  .icon-svg ~ #content #portrait-header {
     display: block;
     position: fixed;
     height: calc(100vh * var(--header-height));
@@ -347,4 +445,8 @@ iframe {
   #landscape-sidebar {
     display: none !important;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* TODO */
 }
