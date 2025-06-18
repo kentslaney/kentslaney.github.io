@@ -29,7 +29,7 @@
   /* computed */
   --sidebar-right: calc(
     (var(--ks-end-pad) + var(--ks-end-scale) * (1 - var(--ks-rescale)) / 2) /
-    (var(--ks-end-scale) * var(--ks-rescale)));
+    (var(--ks-end-scale) * var(--ks-rescale)) / (var(--ks-icon-ratio)));
   --sidebar-total: calc(1 + var(--sidebar-pad) + var(--sidebar-right));
   --icon-over-logo: calc(
     var(--ks-icon-ratio) / (var(--ks-contain-ratio)) * var(--ks-rescale) *
