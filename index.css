@@ -378,7 +378,7 @@ iframe {
     text-align: right;
   }
 
-  .section-icon {
+  #ks-below .section-icon {
     float: right;
     margin: 0 0 0 1rem;
   }
