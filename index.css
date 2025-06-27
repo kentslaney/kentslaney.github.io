@@ -155,7 +155,19 @@ body {
   text-decoration: underline;
 }
 
-#scroll-hint {
+#scroll-hint::before {
+  content: 'scroll';
+  position: fixed;
+  left: 50%;
+  bottom: 7vmin;
+  transform: translateX(-50%);
+  color: var(--divider);
+  font-family: 'Roboto', Arial;
+}
+
+#scroll-hint::after {
+  content: '';
+  display: block;
   position: fixed;
   bottom: 5vmin;
   width: 3vmin;
@@ -383,7 +395,11 @@ iframe {
     margin: 0 0 0 1rem;
   }
 
-  #scroll-hint {
+  #scroll-hint::before {
+    color: #000;
+  }
+
+  #scroll-hint::after {
     border-color: #000;
   }
 }
