@@ -419,7 +419,7 @@ iframe {
     display: initial;
   }
 
-  #ks-center, #ks-left, #ks-svg, #ks-header, .section-icon {
+  #ks-center, #ks-left, #ks-svg, #ks-header, #ks-side-header, .section-icon {
     filter: invert(1);
   }
 
