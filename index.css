@@ -4,6 +4,12 @@
 }
 /**/
 
+@property --header-height {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+}
+
 :root {
   --background: #fff;
   --ks-case-width: 0.6;
@@ -71,6 +77,7 @@
     var(--icon-length) * var(--active-section-marker-margin));
   --side-section-icon-size: calc(
     min(var(--section-menu-size), 100vh * var(--icon-final)));
+  --splash-step: calc(round(down, var(--ks-interpolation)));
 }
 
 body {
@@ -182,15 +189,14 @@ body {
 }
 
 .section-icon {
-  display: inline-block;
-  height: var(--side-section-icon-size);
   pointer-events: none;
 }
 
 #ks-below .section-icon {
+  display: inline-block;
+  height: var(--section-menu-size);
   float: left;
   margin: 0 1rem 0 0;
-  pointer-events: none;
 }
 
 #ks-select {
@@ -224,7 +230,7 @@ lottie-player {
 }
 
 #ks-svg, #headshot, #headshot-dark, #scroll-hint {
-  opacity: calc(1 - round(down, var(--ks-interpolation)));
+  opacity: calc(1 - var(--splash-step));
 }
 
 #ks-icon {
@@ -309,7 +315,7 @@ iframe {
   margin: calc(100vh * var(--sidebar-top)) calc(
     100vh * var(--icon-final) * (var(--icon-pad) - 1) / 2);
   position: fixed;
-  opacity: calc(round(down, var(--ks-interpolation)));
+  opacity: var(--splash-step);
   pointer-events: none;
 }
 
@@ -321,6 +327,8 @@ iframe {
 }
 
 .side-section > .section-icon {
+  display: inline-block;
+  height: var(--side-section-icon-size);
   margin: calc(50% - var(--side-section-icon-size) / 2) auto 0 auto;
   line-height: 1;
 }
@@ -353,6 +361,41 @@ iframe {
   right: calc(-1 * var(--active-section-marker-pad));
   border-radius: calc(var(--icon-length) * (
     0.5 + var(--active-section-marker-margin)));
+}
+
+#header-section {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: calc(100vh * var(--header-height));
+  line-height: 1em;
+  padding-right: 0.3em;
+  opacity: var(--splash-step);
+  transform: translateX(calc((1 - var(--splash-step)) * 10%));
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+#header-section-active {
+  display: inline-block;
+  width: 0.6em;
+  text-wrap: nowrap;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+#header-section-active .section-icon {
+  height: 0.6em;
+  vertical-align: middle;
+}
+
+#header-section-active .section-icon:first-child {
+  margin-left: calc(-0.6em * max(0, var(--headless-min) - 1));
+  transition: margin-left 0.2s;
+}
+
+#header-section-left .section-icon, #header-section-right .section-icon {
+  height: 0.4em;
+  vertical-align: middle;
 }
 
 @media (max-aspect-ratio: 1 / 1) {
@@ -449,7 +492,7 @@ iframe {
     width: 100%;
     background: inherit;
     border-bottom: 1px solid var(--divider);
-    opacity: calc(round(down, var(--ks-interpolation)));
+    opacity: var(--splash-step);
     margin-top: -1px;
     overflow: hidden;
   }

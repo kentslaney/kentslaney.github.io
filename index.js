@@ -1,3 +1,6 @@
+const sections = [
+  "splash", "projects", "adventures", "education", "employment", "contact"]
+
 window.addEventListener("DOMContentLoaded", () => {
   (async () => {
     document.body.classList.add("roboto-fellback")
@@ -53,6 +56,7 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     ]
   });
+
   const selectable = document.querySelector("#ks-select")
   const container = document.querySelector("#scroll-index")
   const parent = document.querySelector("#ks-case")
@@ -71,15 +75,8 @@ window.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", scroll, { passive: true })
   scroll()
   let scroll_bound = true
-  const resize = () => {
-    document.documentElement.style.setProperty(
-      "--page-width", window.innerWidth)
-    document.documentElement.style.setProperty(
-      "--page-height", window.innerHeight)
-  }
-  window.addEventListener("resize", resize, { passive: true })
-  resize()
 
+  let visibility = sections.map(_ => false)
   const viewport = new IntersectionObserver(entries => {
     const splash = entries.find(x => x.target.id === "splash")
     if (splash !== undefined && splash.isIntersecting !== scroll_bound) {
@@ -102,9 +99,33 @@ window.addEventListener("DOMContentLoaded", () => {
     document.documentElement.style.setProperty(
       "--section-max", visibility.lastIndexOf(true) + 1)
   }, { rootMargin: "-1px" })
-  const sections = [
-    "splash", "projects", "adventures", "education", "employment", "contact"]
-  let visibility = sections.map(_ => false)
   sections.map(x => document.getElementById(x))
     .forEach(x => viewport.observe(x))
+
+  let headless, headless_viz = sections.map(_ => false);
+  const resize = () => {
+    document.documentElement.style.setProperty(
+      "--page-width", window.innerWidth)
+    document.documentElement.style.setProperty(
+      "--page-height", window.innerHeight)
+    const header_px = window.getComputedStyle(document.documentElement)
+      .getPropertyValue("--header-height") * window.innerHeight + 1
+    if (headless) headless.disconnect()
+    headless = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const index = sections.indexOf(entry.target.id)
+        headless_viz[index] = entry.isIntersecting
+      })
+      const pos = headless_viz.indexOf(true)
+      document.documentElement.style.setProperty("--headless-min", pos)
+      document.getElementById("header-section-left").href =
+        `#${sections[Math.max(0, pos - 1)]}`
+      document.getElementById("header-section-right").href =
+        `#${sections[Math.min(sections.length - 1, pos + 1)]}`
+    }, { rootMargin: `-${header_px}px -1px -1px -1px` })
+    sections.map(x => document.getElementById(x))
+      .forEach(x => headless.observe(x))
+  }
+  window.addEventListener("resize", resize, { passive: true })
+  resize()
 })
