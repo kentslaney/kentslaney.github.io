@@ -128,4 +128,9 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   window.addEventListener("resize", resize, { passive: true })
   resize()
+
+  document.querySelectorAll("a").forEach(el => {
+    if (el.childNodes.length === 1 && el.firstElementChild === null)
+      el.innerText = el.innerText.trim()
+  })
 })
