@@ -93,7 +93,7 @@ body {
   top: 0;
 }
 
-#headshot, #headshot-dark {
+#headshot, #headshot-dark, #headshot-front, #headshot-front-dark {
   position: fixed;
   top: calc(100vh - min(var(--headshot-max), var(--headshot-width)));
   max-width: var(--headshot-width);
@@ -102,7 +102,7 @@ body {
   z-index: -1;
 }
 
-#headshot-dark {
+#headshot-dark, #splash-tall, #headshot-front-dark {
   display: none;
 }
 
@@ -229,7 +229,8 @@ lottie-player {
   transform: scale(var(--ks-rescale)) translate(-5%, -17%);
 }
 
-#ks-svg, #headshot, #headshot-dark, #scroll-hint {
+#ks-svg, #scroll-hint,
+#headshot, #headshot-dark, #headshot-front, #headshot-front-dark {
   opacity: calc(1 - var(--splash-step));
 }
 
@@ -401,7 +402,16 @@ iframe {
 @media (max-aspect-ratio: 1 / 1) {
   :root {
     --ks-case-width: 1;
+    --headshot-width: 45vw;
     --headshot-pad: calc(-1 * var(--headshot-width));
+  }
+
+  #splash-wide {
+    display: none;
+  }
+
+  #splash-tall {
+    display: initial;
   }
 
   #ks-center {
@@ -422,7 +432,7 @@ iframe {
 }
 
 @media (max-aspect-ratio: 2 / 3) {
-  #headshot, #headshot-dark {
+  #headshot, #headshot-dark, #headshot-front, #headshot-front-dark {
     max-width: 100vw;
     left: 0;
     top: calc(100vh - 100vw);
@@ -458,7 +468,7 @@ iframe {
     color: white;
   }
 
-  #headshot-dark {
+  #headshot-dark, #headshot-front-dark {
     display: initial;
   }
 
