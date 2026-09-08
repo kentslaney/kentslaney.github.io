@@ -281,7 +281,7 @@ iframe {
   top: calc(100vh * (1 - min(1, var(--rel-scroll))));
   margin-left: calc(-100vw * (var(--sidebar-final)) *
     (1 + var(--sidebar-right) + (var(--icon-pad) - 1) / 2) /
-    (var(--sidebar-total)));
+    (var(--sidebar-total)) - var(--active-section-marker-pad));
   overflow-y: clip;
   padding-bottom: var(--active-section-marker-pad);
 }
@@ -291,7 +291,8 @@ iframe {
   margin-top: calc(100vh * (min(1, var(--rel-scroll)) - 1 + var(--ks-height) * (
     var(--ks-end-pad) + var(--ks-end-scale) * (1 - var(--ks-rescale)) / 2) -
     var(--sidebar-top)));
-  width: var(--icon-length);
+  width: calc(
+    (1 + 2 * var(--active-section-marker-margin)) * var(--icon-length));
 }
 
 #ks-circle {
@@ -299,8 +300,9 @@ iframe {
   background: var(--background);
   border-radius: 100%;
   aspect-ratio: 1 / 1;
-  width: 100%;
+  width: var(--icon-length);
   text-align: left;
+  margin-left: var(--active-section-marker-pad);
 }
 
 #ks-header, #ks-side-header {
@@ -322,9 +324,10 @@ iframe {
 
 .side-section {
   display: block;
-  width: 100%;
-  height: calc(var(--icon-length));
+  width: var(--icon-length);
+  height: var(--icon-length);
   margin-top: var(--active-section-marker-pad);
+  margin-left: var(--active-section-marker-pad);
 }
 
 .side-section > .section-icon {
@@ -358,8 +361,8 @@ iframe {
   background: var(--active-section-marker-color);
   top: calc(-1 * var(--active-section-marker-pad));
   bottom: calc(-1 * var(--active-section-marker-pad));
-  left: calc(-1 * var(--active-section-marker-pad));
-  right: calc(-1 * var(--active-section-marker-pad));
+  left: 0;
+  right: 0;
   border-radius: calc(var(--icon-length) * (
     0.5 + var(--active-section-marker-margin)));
 }
