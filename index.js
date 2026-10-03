@@ -87,7 +87,7 @@ window.addEventListener("DOMContentLoaded", () => {
       } else {
         window.removeEventListener("scroll", scroll, { passive: true })
         document.documentElement.style.setProperty(
-          "--splash-scroll", window.outerHeight)
+          "--splash-scroll", window.innerHeight)
       }
     }
     entries.forEach(entry => {
