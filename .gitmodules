@@ -1,0 +1,3 @@
+[submodule "avp-panos"]
+	path = avp-panos
+	url = git@github.com:kentslaney/avp-panos.git
